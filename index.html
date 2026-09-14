@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estudio Jurídico Integral — Azul, Buenos Aires</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bordo:#7A1F2B;
+    --bordo-deep:#4A1019;
+    --bordo-bright:#9B2A38;
+    --bordo-soft:#F3E4E3;
+    --ink:#4A1019;
+    --paper:#FBF9F8;
+    --stone:#EFE9E6;
+    --muted:#79706C;
+    --line:#E2D7D4;
+    --max:1160px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:'Inter', sans-serif; font-size:17px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Space Grotesk', sans-serif; font-weight:600;
+    line-height:1.08; margin:0; letter-spacing:-0.01em;
+  }
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--bordo-bright); outline-offset:3px;}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:
+      linear-gradient(rgba(251, 249, 248, 0.304), rgba(251,249,248,0.90)),
+      url('images/portada_menu.jpg');
+    background-size:cover;
+    background-position:center 40%;
+    backdrop-filter:blur(2px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:20px 32px; max-width:var(--max); margin:0 auto;}
+  .brand{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:30px; display:flex; align-items:center; gap:15px;}
+  .brand .mark{width:52px; height:52px; flex:none; object-fit:contain;}
+  nav ul{list-style:none; display:flex; gap:32px; margin:0; padding:0;}
+  nav ul a{text-decoration:none; font-size:14.5px; font-weight:500; color:var(--ink); transition:color .15s;}
+  nav ul a:hover{color:var(--bordo);}
+  .nav-toggle{display:none;}
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; padding:14px 28px;
+    font-size:14.5px; font-weight:600; text-decoration:none; border-radius:3px;
+    border:1px solid transparent; transition:all .18s;
+  }
+  .btn-primary{border-color:rgba(251,249,248,0.4);background:var(--bordo); color:var(--paper);}
+  .btn-primary:hover{background:var(--bordo-bright);}
+  .btn-outline-light{border-color:rgba(251,249,248,0.4);color:var(--paper);}
+  .btn-outline-light:hover{background:var(--bordo-bright);}
+  .btn-outline{border-color:var(--ink); color:var(--ink);}
+  .btn-outline:hover{background:var(--ink); color:var(--paper);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:
+      linear-gradient(155deg, var(--bordo-deep) 0%, var(--bordo) 62%, var(--bordo-bright) 100%);
+    color:var(--paper); position:relative; overflow:hidden;
+  }
+  .hero::before{
+    content:''; position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(251,249,248,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(251,249,248,0.05) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(ellipse 80% 60% at 70% 30%, black, transparent);
+  }
+  .hero-inner{position:relative; padding:110px 0 90px; display:grid; grid-template-columns:1.2fr 0.8fr; gap:60px; align-items:end;}
+  .hero-kicker{font-size:14.5px; font-weight:500; color:var(--bordo-soft); margin-bottom:20px;}
+  .hero h1{font-size:clamp(40px,5.6vw,66px); max-width:14ch;}
+  .hero p.lede{margin-top:26px; font-size:18.5px; color:#EBD8D6; max-width:44ch;}
+  .hero-actions{margin-top:38px; display:flex; gap:16px; flex-wrap:wrap;}
+  .hero-figure{
+    border:1px solid rgba(251,249,248,0.22); padding:32px;
+    background:rgba(251,249,248,0.04);
+  }
+  .hero-figure .big{font-family:'Space Grotesk',sans-serif; font-size:56px; font-weight:700; line-height:1;}
+  .hero-figure .cap{font-size:14.5px; color:#EBD8D6; margin-top:10px;}
+  .hero-figure hr{border:none; border-top:1px solid rgba(251,249,248,0.2); margin:26px 0;}
+
+  /* ---------- Section shared ---------- */
+  section{padding:100px 0;}
+  .section-head{max-width:620px; margin-bottom:52px;}
+  .section-head .kicker{font-size:14px; font-weight:500; color:var(--bordo); margin-bottom:14px;}
+  .section-head h2{font-size:clamp(28px,3.4vw,40px);}
+  .section-head p{margin-top:16px; color:var(--muted); font-size:16.5px;}
+
+  /* ---------- Services ---------- */
+  .services{background:var(--paper);}
+  .services-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .service-card{background:var(--paper); padding:40px 34px; transition:background .2s;}
+  .service-card:hover{background:var(--bordo-soft);}
+  .service-card .num{font-family:'Space Grotesk',sans-serif; font-size:13px; color:var(--bordo); font-weight:600; margin-bottom:22px;}
+  .service-card h3{font-size:21px; margin-bottom:12px;}
+  .service-card p{color:var(--muted); font-size:15.5px; margin:0;}
+
+  /* ---------- Why us / stats strip ---------- */
+  .strip{background:var(--ink); color:var(--paper);}
+  .strip-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:40px;}
+  .strip-item .num{font-family:'Space Grotesk',sans-serif; font-size:38px; font-weight:700; color:var(--bordo-soft);}
+  .strip-item .lbl{font-size:14px; color:#B8ACA9; margin-top:8px; max-width:20ch;}
+
+  /* ---------- Team ---------- */
+  .team{background:var(--stone);}
+  .team-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
+  .team-card{
+    background:var(--paper); border:1px solid var(--line); overflow:hidden;
+    text-decoration:none; color:var(--ink); display:flex; flex-direction:column;
+    transition:border-color .2s, transform .2s;
+  }
+  .team-card.active:hover{border-color:var(--bordo); transform:translateY(-3px);}
+  .team-photo{
+    aspect-ratio:4/3; background:linear-gradient(155deg, var(--bordo) 0%, var(--bordo-deep) 100%);
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .team-photo img{width:100%; height:100%; object-fit:cover; object-position:top center; display:block;}
+  .team-photo .initials{
+    font-family:'Space Grotesk',sans-serif; font-size:44px; font-weight:700; color:var(--bordo-soft);
+  }
+  .team-card.placeholder .team-photo{background:var(--stone); border-bottom:1px solid var(--line);}
+  .team-card.placeholder .initials{color:#B8ACA9; font-size:15px; font-weight:500; font-family:'Inter',sans-serif;}
+  .team-body{padding:26px 28px 30px;}
+  .team-body h3{font-size:19px; margin-bottom:4px;}
+  .team-body .role{font-size:14px; color:var(--bordo); font-weight:500; margin-bottom:14px;}
+  .team-body p{font-size:14.5px; color:var(--muted); margin:0;}
+  .team-link{
+    margin-top:18px; font-size:13.5px; font-weight:600; color:var(--ink);
+    display:flex; align-items:center; gap:6px;
+  }
+  .team-card.placeholder{opacity:0.7;}
+
+  /* ---------- Process ---------- */
+  .process{background:var(--paper);}
+  .process-list{border-top:1px solid var(--line);}
+  .process-row{
+    display:grid; grid-template-columns:80px 1fr; gap:28px; padding:30px 0;
+    border-bottom:1px solid var(--line); align-items:baseline;
+  }
+  .process-row .step{font-family:'Space Grotesk',sans-serif; font-size:14px; color:var(--bordo); font-weight:600;}
+  .process-row h3{font-size:19px; margin-bottom:6px; display:inline; margin-right:14px;}
+  .process-row p{display:block; margin-top:6px; color:var(--muted); font-size:15.5px; max-width:60ch;}
+
+  /* ---------- CTA / Contact ---------- */
+  .cta{
+    background:linear-gradient(155deg, var(--bordo-deep) 0%, var(--bordo) 100%);
+    color:var(--paper);
+  }
+  .cta-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px; align-items:center;}
+  .cta h2{font-size:clamp(28px,3.6vw,42px); max-width:16ch;}
+  .cta p{margin-top:18px; color:#EBD8D6; font-size:16.5px; max-width:44ch;}
+  .cta-actions{margin-top:32px; display:flex; gap:16px; flex-wrap:wrap;}
+  .cta-panel{border:1px solid rgba(251,249,248,0.22); padding:34px; background:rgba(251,249,248,0.04);}
+  .cta-panel .lbl{font-size:12.5px; color:#D8B9B7; margin-bottom:5px;}
+  .cta-panel .val{font-size:17px; margin-bottom:20px;}
+  .cta-panel .val.placeholder{color:#D8B9B7; font-style:italic; font-size:15px;}
+  .cta-panel .val:last-child{margin-bottom:0;}
+
+  /* ---------- Footer ---------- */
+  footer{padding:36px 0; background:var(--ink); color:#9C918D;}
+  footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:13.5px;}
+  footer a{color:#C9B9B6; text-decoration:none;}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:900px){
+    nav ul{
+      position:fixed; top:66px; left:0; right:0; background:var(--paper); flex-direction:column;
+      padding:24px 32px; gap:20px; border-bottom:1px solid var(--line);
+      transform:translateY(-130%); transition:transform .25s ease;
+    }
+    nav ul.open{transform:translateY(0);}
+    .nav-toggle{display:flex; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px;}
+    .nav-toggle span{width:22px; height:2px; background:var(--ink);}
+    .hero-inner{grid-template-columns:1fr; gap:40px; padding:80px 0 64px;}
+    .services-grid{grid-template-columns:1fr;}
+    .strip-grid{grid-template-columns:1fr 1fr; gap:32px;}
+    .team-grid{grid-template-columns:1fr;}
+    .cta-grid{grid-template-columns:1fr; gap:40px;}
+    section{padding:76px 0;}
+    .wrap{padding:0 22px;}
+  }
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} *{transition:none !important;} }
+</style>
+  <link rel="icon" type="image/png" href="images/logo.png">
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <img class="mark" src="images/logo.png" alt="Estudio Jurídico Integral">
+      Estudio Jurídico Integral
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul id="navMenu">
+      <li><a href="#areas">Áreas de práctica</a></li>
+      <li><a href="#equipo">Equipo</a></li>
+      <li><a href="#proceso">Cómo trabajamos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div>
+      <div class="hero-kicker">Estudio Jurídico Integral — Azul, Buenos Aires</div>
+      <h1>Un equipo, todas las respuestas que tu situación legal necesita.</h1>
+      <p class="lede">Familia, trabajo, sucesiones y mediaciones. Acompañamos cada caso con criterio profesional y trato cercano, en Azul, Tapalqué y Alvear.</p>
+      <div class="hero-actions">
+        <a href="#contacto" class="btn btn-primary">Solicitar consulta</a>
+        <a href="#areas" class="btn btn-outline-light">Ver áreas de práctica</a>
+      </div>
+    </div>
+    <div class="hero-figure">
+      <div class="big">12+</div>
+      <div class="cap">Años de trayectoria en la región</div>
+      <hr>
+      <div class="big">5</div>
+      <div class="cap">Áreas de práctica bajo un mismo equipo</div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="areas">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Áreas de práctica</div>
+      <h2>Todo el asesoramiento legal, en un solo lugar</h2>
+      <p>Del derecho de familia a las relaciones laborales, cubrimos las situaciones legales más frecuentes con un enfoque integral.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="num">01</div>
+        <h3>Derecho de familia</h3>
+        <p>Divorcios, régimen de comunicación, alimentos y acompañamiento en todos los conflictos familiares.</p>
+      </div>
+      <div class="service-card">
+        <div class="num">02</div>
+        <h3>Derecho laboral</h3>
+        <p>Despidos, reclamos salariales, accidentes de trabajo y asesoramiento a empleadores y trabajadores.</p>
+      </div>
+      <div class="service-card">
+        <div class="num">03</div>
+        <h3>Sucesiones</h3>
+        <p>Procesos sucesorios, partición de herencias y planificación patrimonial familiar.</p>
+      </div>
+      <div class="service-card">
+        <div class="num">04</div>
+        <h3>Mediaciones</h3>
+        <p>Resolución de conflictos por vía extrajudicial, con foco en acuerdos rápidos y duraderos.</p>
+      </div>
+      <div class="service-card">
+        <div class="num">05</div>
+        <h3>Derecho civil y comercial</h3>
+        <p>Contratos, constitución de sociedades y asesoramiento comercial continuo.</p>
+      </div>
+      <div class="service-card">
+        <div class="num">06</div>
+        <h3>Niñez y adolescencia</h3>
+        <p>Representación legal de niños, niñas y adolescentes, priorizando siempre su interés superior.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="strip">
+  <div class="wrap strip-grid">
+    <div class="strip-item"><div class="num">12+</div><div class="lbl">Años de ejercicio profesional</div></div>
+    <div class="strip-item"><div class="num">3</div><div class="lbl">Localidades — Azul, Tapalqué, Alvear</div></div>
+    <div class="strip-item"><div class="num">6</div><div class="lbl">Áreas de práctica</div></div>
+    <div class="strip-item"><div class="num">1:1</div><div class="lbl">Atención personalizada en cada caso</div></div>
+  </div>
+</section>
+
+<section class="team" id="equipo">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Nuestro equipo</div>
+      <h2>Las personas detrás de cada caso</h2>
+      <p>Conocé a los profesionales del estudio y su área de especialización.</p>
+    </div>
+    <div class="team-grid">
+      <a href="romina-pasquale.html" class="team-card active">
+        <div class="team-photo"><img src="images/abogada-romina-pasquale.jpg" alt="Romina Pasquale, abogada"></div>
+        <div class="team-body">
+          <h3>Romina Pasquale</h3>
+          <div class="role">Derecho de familia · Niñez y adolescencia</div>
+          <p>12+ años de trayectoria en Azul, Tapalqué y Alvear. Abogada del Niño y Defensora Oficial de Menores.</p>
+          <div class="team-link">Ver perfil completo</div>
+        </div>
+      </a>
+      <div class="team-card placeholder">
+        <div class="team-photo"><span class="initials">Próximamente</span></div>
+        <div class="team-body">
+          <h3>Nuevo integrante</h3>
+          <div class="role">Derecho laboral</div>
+          <p>Perfil en incorporación al equipo del estudio.</p>
+        </div>
+      </div>
+      <div class="team-card placeholder">
+        <div class="team-photo"><span class="initials">Próximamente</span></div>
+        <div class="team-body">
+          <h3>Nuevo integrante</h3>
+          <div class="role">Mediaciones</div>
+          <p>Perfil en incorporación al equipo del estudio.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="proceso">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Cómo trabajamos</div>
+      <h2>Un proceso claro, de principio a fin</h2>
+    </div>
+    <div class="process-list">
+      <div class="process-row">
+        <div class="step">01</div>
+        <div><h3>Primera consulta</h3><p>Nos contás tu situación y evaluamos juntos el mejor camino legal a seguir.</p></div>
+      </div>
+      <div class="process-row">
+        <div class="step">02</div>
+        <div><h3>Análisis del caso</h3><p>Definimos la estrategia según tus objetivos, plazos y particularidades.</p></div>
+      </div>
+      <div class="process-row">
+        <div class="step">03</div>
+        <div><h3>Acompañamiento</h3><p>Te mantenemos informado en cada etapa, con comunicación directa y sin intermediarios.</p></div>
+      </div>
+      <div class="process-row">
+        <div class="step">04</div>
+        <div><h3>Resolución</h3><p>Trabajamos para llegar a la mejor solución posible, judicial o extrajudicial.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contacto">
+  <div class="wrap cta-grid">
+    <div>
+      <h2>Empecemos con una conversación</h2>
+      <p>Contanos tu caso y te ayudamos a entender tus opciones. Primera consulta sin compromiso.</p>
+      <div class="cta-actions">
+        <a href="https://wa.me/5492281300653" target="_blank" rel="noopener" class="btn btn-primary" style="background:var(--paper); color:var(--bordo-deep);">Escribinos por WhatsApp</a>
+      </div>
+    </div>
+    <div class="cta-panel">
+      <div class="lbl">Email</div>
+      <div class="val placeholder">romipasquale.estudio@gmail.com</div>
+      <div class="lbl">Teléfono</div>
+      <div class="val placeholder">2281300653</div>
+      <div class="lbl">Dirección</div>
+      <div class="val placeholder">moreno 568</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Estudio Jurídico Integral. Azul, Buenos Aires.</span>
+    <span><a href="romina-pasquale.html">Equipo</a></span>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const menu = document.getElementById('navMenu');
+  toggle.addEventListener('click', () => {
+    const isOpen = menu.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', isOpen);
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menu.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }));
+</script>
+
+</body>
+</html>
