@@ -50,9 +50,9 @@
   .nav{display:flex; align-items:center; justify-content:space-between; padding:20px 32px; max-width:var(--max); margin:0 auto;}
   .brand{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:30px; display:flex; align-items:center; gap:15px;}
   .brand .mark{width:52px; height:52px; flex:none; object-fit:contain;}
-  nav ul{list-style:none; display:flex; gap:32px; margin:0; padding:0;}
-  nav ul a{text-decoration:none; font-size:14.5px; font-weight:500; color:var(--ink); transition:color .15s;}
-  nav ul a:hover{color:var(--bordo);}
+  .nav > ul{list-style:none; display:flex; gap:32px; margin:0; padding:0;}
+  .nav > ul a{text-decoration:none; font-size:14.5px; font-weight:500; color:var(--ink); transition:color .15s;}
+  .nav > ul a:hover{color:var(--bordo);}
   .nav-toggle{display:none;}
 
   .btn{
@@ -60,10 +60,10 @@
     font-size:14.5px; font-weight:600; text-decoration:none; border-radius:3px;
     border:1px solid transparent; transition:all .18s;
   }
-  .btn-primary{border-color:rgba(251,249,248,0.4);background:var(--bordo); color:var(--paper);}
+  .btn-primary{background:var(--bordo); color:var(--paper);}
   .btn-primary:hover{background:var(--bordo-bright);}
-  .btn-outline-light{border-color:rgba(251,249,248,0.4);color:var(--paper);}
-  .btn-outline-light:hover{background:var(--bordo-bright);}
+  .btn-outline-light{border-color:rgba(251,249,248,0.4); color:var(--paper);}
+  .btn-outline-light:hover{background:rgba(251,249,248,0.12);}
   .btn-outline{border-color:var(--ink); color:var(--ink);}
   .btn-outline:hover{background:var(--ink); color:var(--paper);}
 
@@ -179,12 +179,12 @@
 
   /* ---------- Responsive ---------- */
   @media (max-width:900px){
-    nav ul{
+    .nav > ul{
       position:fixed; top:66px; left:0; right:0; background:var(--paper); flex-direction:column;
       padding:24px 32px; gap:20px; border-bottom:1px solid var(--line);
       transform:translateY(-130%); transition:transform .25s ease;
     }
-    nav ul.open{transform:translateY(0);}
+    .nav > ul.open{transform:translateY(0);}
     .nav-toggle{display:flex; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px;}
     .nav-toggle span{width:22px; height:2px; background:var(--ink);}
     .hero-inner{grid-template-columns:1fr; gap:40px; padding:80px 0 64px;}
