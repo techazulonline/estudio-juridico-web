@@ -43,7 +43,7 @@
       linear-gradient(rgba(251, 249, 248, 0.304), rgba(251,249,248,0.90)),
       url('images/portada_menu.jpg');
     background-size:100%;
-    background-position:center 40%;
+    background-position:center 45%;
     background-repeat:no-repeat;
     backdrop-filter:blur(2px);
     border-bottom:1px solid var(--line);
@@ -178,6 +178,12 @@
   footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:13.5px;}
   footer a{color:#C9B9B6; text-decoration:none;}
 
+  @media (min-width:901px){
+    .nav{
+        padding-top:75px;
+        padding-bottom:50px;
+    }
+}
   /* ---------- Responsive ---------- */
   @media (max-width:900px){
     .nav > ul{
